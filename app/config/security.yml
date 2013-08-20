@@ -9,7 +9,10 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        main:
+        chain:
+            chain:
+                providers: [user, in_memory]
+        user:
             entity: { class: Acme\UserBundle\Entity\User, property: username }
 
         in_memory:
@@ -41,6 +44,7 @@ security:
                 path:   /logout
                 target: /
             anonymous: ~
+            provider: chain
             #http_basic:
             #    realm: "Secured Demo Area"
 
